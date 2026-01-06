@@ -24,7 +24,7 @@
  */
 
 /* ------------------------------------------------------------ *\
-	I.   Generic
+  I.   Generic
 \* ------------------------------------------------------------ */
 
 /* 1. Reset */
@@ -47,15 +47,67 @@ html {
 /* 2. Variables */
 
 :root {
+  /* Colors */
   --color-red: #f10007;
   --color-green: #00a650;
   --color-black: #000;
   --color-white: #fff;
+  --color-shadow-gray: #3d3d3d;
+
+  /* Typography */
   --base-font-size: 1rem;
   --base-line-height: 1.3;
   --font-family: "Arial", sans-serif;
+
+  /* Layout / sizing */
   --cell-height: 55px;
   --mobile-cell-height: 40px;
+  --wrapper-max-width: 1200px;
+
+  /* Borders / radius */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+  --radius-chip-button: 50%;
+  --radius-green: 80px;
+
+  /* Spacing */
+  --wrapper-padding: 5px;
+  --board-padding: 10px;
+
+  /* Chip positioning */
+  --chip-size: 23px;
+  --chip-size-md: 18px;
+  --chip-font-size: 9px;
+
+  --chip-left-blue: -2px;
+  --chip-left-yellow: 23px;
+  --chip-left-red: 47px;
+
+  --chip-left-yellow-md: 15px;
+  --chip-left-red-md: 32px;
+
+  --chip-top-default: 1px;
+  --chip-left-inner: 2px;
+
+  --chip-left-yellow-inner: 30px;
+  --chip-left-red-inner: 50px;
+
+  /* Sprite */
+  --sprite-url: url(../images/icons-sprite.png);
+  --sprite-bg-default: -5px -4px;
+
+  /* Button sizes */
+  --chip-btn-size: 83px;
+  --action-btn-size: 48px;
+
+  /* Shadows */
+  --shadow-cell-hover: inset 1px 1px 20px var(--color-black);
+  --shadow-cell-hover-invert: inset 1px 1px 20px var(--color-white);
+  --shadow-chip-hover: 0 12px 16px var(--color-shadow-gray);
+  --shadow-action-hover: 0 7px 10px var(--color-black);
+
+  /* Motion */
+  --transition-fast: 0.5s;
 }
 
 /* 3 General */
@@ -77,36 +129,41 @@ body.cursor-red {
 }
 
 body.cursor .cell:hover {
-  box-shadow: inset 1px 1px 20px var(--color-black);
+  box-shadow: var(--shadow-cell-hover);
 }
 
 body.cursor .cell--black:hover {
-  box-shadow: inset 1px 1px 20px var(--color-white);
+  box-shadow: var(--shadow-cell-hover-invert);
 }
+
 /* ------------------------------------------------------------ *\
-	II.   Layout
+  II.   Layout
 \* ------------------------------------------------------------ */
 
 /* 1. Wrapper */
+
 .wrapper {
   display: flex;
   justify-content: center;
-  padding: 5px;
-  max-width: 1200px;
+  padding: var(--wrapper-padding);
+  max-width: var(--wrapper-max-width);
   margin: auto;
 }
+
 /* ------------------------------------------------------------ *\
-	III.   Components
+  III.   Components
 \* ------------------------------------------------------------ */
 
 /* 1.Board */
 
 .board-container {
   flex: 0 1 100%;
-  padding: 10px;
-  border: 3px solid var(--color-black);
+  padding: var(--board-padding);
+  border: var(--border-w-thick) solid var(--color-black);
 }
+
 /* Main Cells */
+
 .main-cells {
   display: flex;
   flex-flow: column-reverse wrap;
@@ -116,6 +173,7 @@ body.cursor .cell--black:hover {
 }
 
 /* Bottom Cells */
+
 .bottom-cells {
   width: calc(100% - (100% / 7));
   margin: auto;
@@ -134,12 +192,13 @@ body.cursor .cell--black:hover {
 }
 
 /* Cell / Chip Set */
+
 .cell {
   text-align: center;
   align-content: center;
   width: calc(100% / 14);
   padding: 10px 0;
-  border: 1px solid var(--color-black);
+  border: var(--border-w) solid var(--color-black);
   position: relative;
   height: var(--cell-height);
 }
@@ -155,8 +214,8 @@ body.cursor .cell--black:hover {
 }
 
 .cell .chip-set--blue {
-  left: -2px;
-  top: 1px;
+  left: var(--chip-left-blue);
+  top: var(--chip-top-default);
 }
 
 .cell .chip-set--blue .small-chip {
@@ -172,29 +231,30 @@ body.cursor .cell--black:hover {
 }
 
 .cell .chip-set--yellow {
-  left: 23px;
-  top: 1px;
+  left: var(--chip-left-yellow);
+  top: var(--chip-top-default);
 }
 
 .cell .chip-set--red {
-  left: 47px;
-  top: 1px;
+  left: var(--chip-left-red);
+  top: var(--chip-top-default);
 }
 
 .cell .small-chip {
   position: absolute;
   top: min(var(--chip-top), 27px);
-  left: 2px;
-  width: 23px;
-  height: 23px;
-  border-radius: 50%;
-  font-size: 9px;
+  left: var(--chip-left-inner);
+  width: var(--chip-size);
+  height: var(--chip-size);
+  border-radius: var(--radius-chip-button);
+  font-size: var(--chip-font-size);
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
   color: var(--color-black);
   align-content: center;
+  overflow: hidden;
 }
 
 .cell .small-chip:nth-child(2) {
@@ -202,11 +262,11 @@ body.cursor .cell--black:hover {
 }
 
 .cell .small-chip.yellow {
-  left: 30px;
+  left: var(--chip-left-yellow-inner);
 }
 
 .cell .small-chip.red {
-  left: 50px;
+  left: var(--chip-left-red-inner);
 }
 
 .cell--red,
@@ -226,7 +286,7 @@ body.cursor .cell--black:hover {
 .cell--green {
   background-color: var(--color-green);
   flex: 1 1 calc(3 * var(--cell-height));
-  border-radius: 80px 0 0 80px;
+  border-radius: var(--radius-green) 0 0 var(--radius-green);
 }
 
 .cell--green .chip-set {
@@ -243,26 +303,27 @@ body.cursor .cell--black:hover {
 }
 
 /* Chips */
+
 .bets .bets__chip button,
 .bets .bets__actions button {
-  background: transparent url(../images/icons-sprite.png) no-repeat -5px -4px;
+  background: transparent var(--sprite-url) no-repeat var(--sprite-bg-default);
   cursor: pointer;
   border: 0;
 }
 
 .bets .bets__chip button {
-  width: 83px;
-  height: 83px;
+  width: var(--chip-btn-size);
+  height: var(--chip-btn-size);
   font-weight: 700;
   font-size: 22px;
-  border-radius: 50%;
+  border-radius: var(--radius-chip-button);
   margin: 0 5px;
-  transition: all 0.5s;
+  transition: all var(--transition-fast);
 }
 
 .bets .bets__chip button.selected,
 .bets .bets__chip button:hover {
-  box-shadow: 0 12px 16px #3d3d3d;
+  box-shadow: var(--shadow-chip-hover);
 }
 
 .bets .bets__chip button.selected {
@@ -270,19 +331,21 @@ body.cursor .cell--black:hover {
 }
 
 /* Actions */
+
 .bets .bets__actions button {
-  width: 48px;
-  height: 48px;
+  width: var(--action-btn-size);
+  height: var(--action-btn-size);
   font-size: 0;
-  border-radius: 50%;
-  transition: box-shadow 0.5s;
+  border-radius: var(--radius-chip-button);
+  transition: box-shadow var(--transition-fast);
 }
 
 .bets .bets__actions button:hover {
-  box-shadow: 0 7px 10px #000;
+  box-shadow: var(--shadow-action-hover);
 }
 
 /* Sprite Positions */
+
 #prev {
   background-position: -266px -5px;
 }
@@ -304,21 +367,21 @@ body.cursor .cell--black:hover {
 }
 
 /* ------------------------------------------------------------ *\
-	IV.   Responsive
+  IV.   Responsive
 \* ------------------------------------------------------------ */
 
 @media screen and (max-width: 1199px) {
   .cell .chip-set--yellow {
-    left: 15px;
+    left: var(--chip-left-yellow-md);
   }
 
   .cell .chip-set--red {
-    left: 32px;
+    left: var(--chip-left-red-md);
   }
 
   .cell .small-chip {
-    width: 18px;
-    height: 18px;
+    width: var(--chip-size-md);
+    height: var(--chip-size-md);
   }
 }
 
@@ -345,7 +408,7 @@ body.cursor .cell--black:hover {
 
   .cell--green {
     flex: 1 1 100%;
-    border-radius: 80px 80px 0 0;
+    border-radius: var(--radius-green) var(--radius-green) 0 0;
     padding: 40px 0;
   }
 
@@ -396,9 +459,11 @@ body.cursor .cell--black:hover {
   .main-cells {
     flex-shrink: 0;
   }
+
   .cell .small-chip {
     top: min(var(--chip-top), 19px);
   }
+
   .bets .bets__chip {
     right: 0;
     gap: 0;
