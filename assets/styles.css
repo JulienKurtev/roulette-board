@@ -19,8 +19,9 @@
 	IV.  Responsive -----------------------------------
 	     1. <= 1199px ---------------------------------
 	     2. <= 767px ----------------------------------
-	     3. <= 390px ----------------------------------
-	     4. <= 330px ----------------------------------
+       3. <= 599px ----------------------------------
+	     4. <= 390px ----------------------------------
+	     5. <= 360px and 600 --------------------------
  */
 
 /* ------------------------------------------------------------ *\
@@ -60,19 +61,17 @@ html {
   --font-family: "Arial", sans-serif;
 
   /* Layout / sizing */
-  --cell-height: 55px;
-  --mobile-cell-height: 40px;
+  --cell-width: 7.14%;
+  --cell-height: 33.33%;
   --wrapper-max-width: 1200px;
 
   /* Borders / radius */
   --border-w: 1px;
-  --border-w-thick: 3px;
   --radius-chip-button: 50%;
   --radius-green: 80px;
 
   /* Spacing */
-  --wrapper-padding: 5px;
-  --board-padding: 10px;
+  --board-padding: 15px 10px;
 
   /* Chip positioning */
   --chip-size: 23px;
@@ -136,6 +135,16 @@ body.cursor .cell--black:hover {
   box-shadow: var(--shadow-cell-hover-invert);
 }
 
+body.initial .bets .bets__actions button,
+body.initial .board {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+body.initial .bets__chip button {
+  animation: bounceGlow 1.2s ease-in-out infinite;
+}
+
 /* ------------------------------------------------------------ *\
   II.   Layout
 \* ------------------------------------------------------------ */
@@ -145,7 +154,6 @@ body.cursor .cell--black:hover {
 .wrapper {
   display: flex;
   justify-content: center;
-  padding: var(--wrapper-padding);
   max-width: var(--wrapper-max-width);
   margin: auto;
 }
@@ -159,7 +167,6 @@ body.cursor .cell--black:hover {
 .board-container {
   flex: 0 1 100%;
   padding: var(--board-padding);
-  border: var(--border-w-thick) solid var(--color-black);
 }
 
 /* Main Cells */
@@ -169,13 +176,13 @@ body.cursor .cell--black:hover {
   flex-flow: column-reverse wrap;
   align-content: center;
   justify-content: center;
-  height: calc(3 * var(--cell-height));
+  height: 165px;
 }
 
 /* Bottom Cells */
 
 .bottom-cells {
-  width: calc(100% - (100% / 7));
+  width: 85.73%;
   margin: auto;
 }
 
@@ -187,16 +194,12 @@ body.cursor .cell--black:hover {
   flex: 1;
 }
 
-.bottom-cells .row:first-child .cell {
-  flex-basis: 33.33%;
-}
-
 /* Cell / Chip Set */
 
 .cell {
   text-align: center;
   align-content: center;
-  width: calc(100% / 14);
+  width: var(--cell-width);
   padding: 10px 0;
   border: var(--border-w) solid var(--color-black);
   position: relative;
@@ -285,7 +288,7 @@ body.cursor .cell--black:hover {
 
 .cell--green {
   background-color: var(--color-green);
-  flex: 1 1 calc(3 * var(--cell-height));
+  flex: 1 1 100%;
   border-radius: var(--radius-green) 0 0 var(--radius-green);
 }
 
@@ -330,12 +333,24 @@ body.cursor .cell--black:hover {
   transform: translateY(-10px);
 }
 
+@keyframes bounceGlow {
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 8px rgba(255, 255, 0, 0.3);
+  }
+  50% {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+  }
+}
+
 /* Actions */
 
 .bets .bets__actions button {
   width: var(--action-btn-size);
   height: var(--action-btn-size);
-  font-size: 0;
+
   border-radius: var(--radius-chip-button);
   transition: box-shadow var(--transition-fast);
 }
@@ -386,9 +401,19 @@ body.cursor .cell--black:hover {
 }
 
 @media screen and (max-width: 767px) {
+  .board-container {
+    zoom: 0.8;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  :root {
+    --cell-width: 33.33%;
+    --cell-height: 7.14%;
+    --board-padding: 25px 10px;
+  }
   .board {
     display: flex;
-    padding-right: 40px;
   }
 
   .main-cells {
@@ -401,13 +426,7 @@ body.cursor .cell--black:hover {
     order: 1;
   }
 
-  .cell {
-    width: calc(100% / 3);
-    height: var(--mobile-cell-height);
-  }
-
   .cell--green {
-    flex: 1 1 100%;
     border-radius: var(--radius-green) var(--radius-green) 0 0;
     padding: 40px 0;
   }
@@ -415,7 +434,7 @@ body.cursor .cell--black:hover {
   .bottom-cells {
     display: flex;
     flex-basis: 103px;
-    margin: 80px 0 40px;
+    margin: 64px 0 30px;
   }
 
   .bottom-cells .row:first-child {
@@ -441,10 +460,6 @@ body.cursor .cell--black:hover {
     margin-top: 30px;
   }
 
-  .bets .bets__actions {
-    margin-top: -20px;
-  }
-
   .bets .bets__chip {
     display: flex;
     flex-direction: column;
@@ -456,27 +471,13 @@ body.cursor .cell--black:hover {
 }
 
 @media screen and (max-width: 390px) {
-  .main-cells {
-    flex-shrink: 0;
-  }
-
   .cell .small-chip {
     top: min(var(--chip-top), 19px);
   }
-
-  .bets .bets__chip {
-    right: 0;
-    gap: 0;
-  }
-
-  .bets .bets__chip button,
-  .bets .bets__chip button.selected {
-    transform: scale(0.5);
-  }
 }
 
-@media screen and (max-width: 330px) {
-  .bets .bets__chip {
-    right: -21px;
+@media screen and (max-width: 360px) and (max-height: 600px) {
+  .board-container {
+    zoom: 0.6;
   }
 }

@@ -91,9 +91,9 @@
       const boardCellLabel = e.target.closest(".cell").dataset.value;
 
       placeBet(chipValue, boardCellLabel);
+    } else {
+      unselectChip();
     }
-
-    unselectChip();
   });
 
   //Keyboard Events
@@ -143,6 +143,7 @@
       "cursor-red"
     );
     if (chipValue) {
+      body.classList.remove("initial");
       body.classList.add("cursor", `cursor-${CHIP_VALUE_COLOR[chipValue]}`);
     }
   }
