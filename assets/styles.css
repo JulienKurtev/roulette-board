@@ -448,11 +448,14 @@ body.initial .bets__chip button {
   }
 
   .bottom-cells .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
   }
 
   .bottom-cells .cell p {
-    writing-mode: vertical-rl; /* or vertical-lr */
+    writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: none;
     width: auto;
