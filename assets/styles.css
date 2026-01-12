@@ -423,7 +423,7 @@ body.initial .bets__chip button {
     align-content: center;
     justify-content: center;
     height: auto;
-    flex-basis: 45%;
+    flex-basis: 156px;
     order: 1;
   }
 
@@ -434,7 +434,7 @@ body.initial .bets__chip button {
 
   .bottom-cells {
     display: flex;
-    flex-basis: 25%;
+    flex-basis: 103px;
     margin: 64px 0 30px;
   }
 
@@ -473,7 +473,7 @@ body.initial .bets__chip button {
     flex-direction: column;
     position: absolute;
     top: 85px;
-    right: 2%;
+    right: calc(100% - 390px);
     gap: 20px;
   }
 }
