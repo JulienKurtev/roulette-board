@@ -423,7 +423,7 @@ body.initial .bets__chip button {
     align-content: center;
     justify-content: center;
     height: auto;
-    flex-basis: 156px;
+    flex-basis: 45%;
     order: 1;
   }
 
@@ -434,7 +434,7 @@ body.initial .bets__chip button {
 
   .bottom-cells {
     display: flex;
-    flex-basis: 103px;
+    flex-basis: 25%;
     margin: 64px 0 30px;
   }
 
@@ -473,7 +473,7 @@ body.initial .bets__chip button {
     flex-direction: column;
     position: absolute;
     top: 85px;
-    right: calc(100% - 390px);
+    right: 2%;
     gap: 20px;
   }
 }
@@ -484,7 +484,7 @@ body.initial .bets__chip button {
   }
 }
 
-@media screen and (max-width: 360px) and (max-height: 600px) {
+@media screen and (max-width: 360px) and (max-height: 640px) {
   .board-container {
     zoom: 0.6;
   }
