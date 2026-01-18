@@ -33,7 +33,6 @@
 * {
   margin: 0;
   padding: 0;
-  touch-action: none;
 }
 
 *,
@@ -434,7 +433,7 @@ body.initial .bets__chip button {
     height: auto;
     flex-basis: 42%;
     order: 1;
-    line-height: 0;
+    line-height: 1;
   }
 
   .cell--green {
