@@ -45,6 +45,11 @@ html {
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 /* 2. Variables */
 
 :root {
@@ -63,7 +68,6 @@ html {
   /* Layout / sizing */
   --cell-width: 7.14%;
   --cell-height: 33.33%;
-  --wrapper-max-width: 1200px;
 
   /* Borders / radius */
   --border-w: 1px;
@@ -157,12 +161,12 @@ body.initial .bets__chip button {
 
 /* 1. Wrapper */
 
-.wrapper {
+/* .wrapper {
   display: flex;
   justify-content: center;
   max-width: var(--wrapper-max-width);
   margin: auto;
-}
+} */
 
 /* ------------------------------------------------------------ *\
   III.   Components
@@ -171,7 +175,8 @@ body.initial .bets__chip button {
 /* 1.Board */
 
 .board-container {
-  flex: 0 1 100%;
+  max-width: 1200px;
+  margin: auto;
   padding: var(--board-padding);
 }
 
@@ -415,12 +420,14 @@ body.initial .bets__chip button {
   }
 
   .board-container {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
+    height: 100%;
   }
   .board {
     display: flex;
-    flex: 1;
+    /* flex: 1; */
+    height: calc(100% - 60px);
   }
 
   .main-cells {
