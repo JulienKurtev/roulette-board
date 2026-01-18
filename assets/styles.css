@@ -33,6 +33,7 @@
 * {
   margin: 0;
   padding: 0;
+  touch-action: none;
 }
 
 *,
@@ -113,7 +114,6 @@ html {
 
 body {
   font: var(--base-font-size) / var(--base-line-height) var(--font-family);
-  touch-action: manipulation;
 }
 
 body.cursor-blue {
