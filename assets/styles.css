@@ -414,11 +414,6 @@ body.initial .bets__chip button {
     --cell-height: 7.14%;
   }
 
-  html,
-  body,
-  .wrapper {
-    height: 100%;
-  }
   .board-container {
     display: flex;
     flex-direction: column;
