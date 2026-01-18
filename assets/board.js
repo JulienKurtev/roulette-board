@@ -136,7 +136,7 @@
     "touchend",
     function (event) {
       const now = Date.now();
-      if (now - lastTouchEnd <= 300) {
+      if (now - lastTouchEnd <= 100) {
         event.preventDefault();
       }
       lastTouchEnd = now;
