@@ -71,7 +71,7 @@ html {
   --radius-green: 80px;
 
   /* Spacing */
-  --board-padding: 15px 10px;
+  --board-padding: 25px 10px;
 
   /* Chip positioning */
   --chip-size: 23px;
@@ -113,18 +113,25 @@ html {
 
 body {
   font: var(--base-font-size) / var(--base-line-height) var(--font-family);
+  touch-action: manipulation;
 }
 
 body.cursor-blue {
-  cursor: url("../images/small1.png") 0 0, auto;
+  cursor:
+    url("../images/small1.png") 0 0,
+    auto;
 }
 
 body.cursor-yellow {
-  cursor: url("../images/small2.png") 0 0, auto;
+  cursor:
+    url("../images/small2.png") 0 0,
+    auto;
 }
 
 body.cursor-red {
-  cursor: url("../images/small3.png") 0 0, auto;
+  cursor:
+    url("../images/small3.png") 0 0,
+    auto;
 }
 
 body.cursor .cell:hover {
@@ -245,7 +252,7 @@ body.initial .bets__chip button {
 
 .cell .small-chip {
   position: absolute;
-  top: min(var(--chip-top), 27px);
+  top: var(--chip-top);
   left: var(--chip-left-inner);
   width: var(--chip-size);
   height: var(--chip-size);
@@ -258,6 +265,7 @@ body.initial .bets__chip button {
   color: var(--color-black);
   align-content: center;
   overflow: hidden;
+  z-index: 1;
 }
 
 .cell .small-chip:nth-child(2) {
@@ -401,20 +409,21 @@ body.initial .bets__chip button {
   }
 }
 
-@media screen and (max-width: 767px) {
-  .board-container {
-    zoom: 0.7;
-  }
-}
-
-@media screen and (max-width: 567px) {
+@media screen and (max-width: 639px) {
   :root {
     --cell-width: 33.33%;
     --cell-height: 7.14%;
-    --board-padding: 25px 10px;
+  }
+  .wrapper {
+    height: 100dvh;
+  }
+  .board-container {
+    display: flex;
+    flex-direction: column;
   }
   .board {
     display: flex;
+    flex: 1;
   }
 
   .main-cells {
@@ -423,18 +432,19 @@ body.initial .bets__chip button {
     align-content: center;
     justify-content: center;
     height: auto;
-    flex-basis: 156px;
+    flex-basis: 42%;
     order: 1;
+    line-height: 0;
   }
 
   .cell--green {
     border-radius: var(--radius-green) var(--radius-green) 0 0;
-    padding: 40px 0;
+    padding: 55px 0 20px;
   }
 
   .bottom-cells {
     display: flex;
-    flex-basis: 103px;
+    flex-basis: 30%;
     margin: 64px 0 30px;
   }
 
@@ -471,21 +481,16 @@ body.initial .bets__chip button {
   .bets .bets__chip {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 85px;
-    right: calc(100% - 390px);
-    gap: 20px;
+    position: fixed;
+    top: 50dvh;
+    right: 2vw;
+    gap: 15px;
+    transform: translateY(-65%);
   }
-}
 
-@media screen and (max-width: 390px) {
-  .cell .small-chip {
-    top: min(var(--chip-top), 19px);
-  }
-}
-
-@media screen and (max-width: 360px) and (max-height: 640px) {
-  .board-container {
-    zoom: 0.6;
+  .bets .bets__actions {
+    flex-basis: 75%;
+    display: flex;
+    justify-content: space-around;
   }
 }
