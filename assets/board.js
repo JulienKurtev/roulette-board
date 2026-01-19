@@ -400,7 +400,11 @@
   //Add gap on the chip in the current stack
   function addGapToChipInStack(chip, chipSetEl) {
     const chipSetCount = chipSetEl.children.length;
-    const cellHeight = chipSetEl.closest(".cell").offsetHeight;
+    const selectedCell = chipSetEl.closest(".cell");
+
+    let cellHeight = selectedCell.offsetHeight;
+
+    if (selectedCell.classList.contains("cell--green")) cellHeight -= 15;
 
     chip.style.setProperty(
       "--chip-top",
