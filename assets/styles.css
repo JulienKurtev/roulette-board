@@ -45,6 +45,10 @@ body {
   height: 100%;
 }
 
+button {
+  touch-action: manipulation;
+}
+
 /* 2. Variables */
 
 :root {
@@ -404,6 +408,7 @@ body.initial .bets__chip button {
   .board-container {
     height: 100%;
   }
+
   .board {
     display: flex;
     height: calc(100% - 117px);
