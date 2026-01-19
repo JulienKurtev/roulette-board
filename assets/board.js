@@ -130,6 +130,20 @@
     };
   }
 
+  // Disable double tap zoom
+  let lastTouchEnd = 0;
+  document.addEventListener(
+    "touchend",
+    function (event) {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 100) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    },
+    false,
+  );
+
   /* ------------------------------------------------------------ *\
 	   IV.   UI
   \* ------------------------------------------------------------ */
@@ -140,7 +154,7 @@
       "cursor",
       "cursor-blue",
       "cursor-yellow",
-      "cursor-red"
+      "cursor-red",
     );
     if (chipValue) {
       body.classList.remove("initial");
@@ -294,7 +308,7 @@
       for (let chipValue in boardCells[cell]) {
         if (expression === "/") {
           boardCells[cell][chipValue] = Math.floor(
-            boardCells[cell][chipValue] / 2
+            boardCells[cell][chipValue] / 2,
           );
         } else {
           boardCells[cell][chipValue] *= 2;
@@ -327,7 +341,7 @@
     //Create new chip set if doesn't exist and append it
     if (!chipSetEl) {
       const selectedCell = document.querySelector(
-        `[data-value="${cellLabel}"]`
+        `[data-value="${cellLabel}"]`,
       );
       const chipColor = CHIP_VALUE_COLOR[chipValue];
 
@@ -386,7 +400,16 @@
   //Add gap on the chip in the current stack
   function addGapToChipInStack(chip, chipSetEl) {
     const chipSetCount = chipSetEl.children.length;
-    chip.style.setProperty("--chip-top", `${chipSetCount}px`);
+    const selectedCell = chipSetEl.closest(".cell");
+
+    let cellHeight = selectedCell.offsetHeight;
+
+    if (selectedCell.classList.contains("cell--green")) cellHeight -= 15;
+
+    chip.style.setProperty(
+      "--chip-top",
+      `${Math.min(chipSetCount, cellHeight - 25)}px`,
+    );
   }
 
   //Redraw all chips on the board

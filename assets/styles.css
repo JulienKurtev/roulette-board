@@ -5,9 +5,7 @@
 	     1. Reset -------------------------------------
 	     2. Variables ---------------------------------
 	     3. General -----------------------------------
-	II.  Layout ---------------------------------------
-	     1. Wrapper -----------------------------------
-	III. Components -----------------------------------
+	II. Components -----------------------------------
 	     1. Board -------------------------------------
 	         Main Cells -------------------------------
 	         Bottom Cells -----------------------------
@@ -16,12 +14,9 @@
 	         Chips ------------------------------------
 	         Actions ----------------------------------
 	         Sprite Positions -------------------------
-	IV.  Responsive -----------------------------------
+	III.  Responsive -----------------------------------
 	     1. <= 1199px ---------------------------------
-	     2. <= 767px ----------------------------------
-       3. <= 599px ----------------------------------
-	     4. <= 390px ----------------------------------
-	     5. <= 360px and 600 --------------------------
+	     2. <= 639px ----------------------------------
  */
 
 /* ------------------------------------------------------------ *\
@@ -45,6 +40,11 @@ html {
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 /* 2. Variables */
 
 :root {
@@ -63,7 +63,6 @@ html {
   /* Layout / sizing */
   --cell-width: 7.14%;
   --cell-height: 33.33%;
-  --wrapper-max-width: 1200px;
 
   /* Borders / radius */
   --border-w: 1px;
@@ -71,7 +70,7 @@ html {
   --radius-green: 80px;
 
   /* Spacing */
-  --board-padding: 15px 10px;
+  --board-padding: 25px 10px;
 
   /* Chip positioning */
   --chip-size: 23px;
@@ -116,15 +115,21 @@ body {
 }
 
 body.cursor-blue {
-  cursor: url("../images/small1.png") 0 0, auto;
+  cursor:
+    url("../images/small1.png") 0 0,
+    auto;
 }
 
 body.cursor-yellow {
-  cursor: url("../images/small2.png") 0 0, auto;
+  cursor:
+    url("../images/small2.png") 0 0,
+    auto;
 }
 
 body.cursor-red {
-  cursor: url("../images/small3.png") 0 0, auto;
+  cursor:
+    url("../images/small3.png") 0 0,
+    auto;
 }
 
 body.cursor .cell:hover {
@@ -146,26 +151,14 @@ body.initial .bets__chip button {
 }
 
 /* ------------------------------------------------------------ *\
-  II.   Layout
-\* ------------------------------------------------------------ */
-
-/* 1. Wrapper */
-
-.wrapper {
-  display: flex;
-  justify-content: center;
-  max-width: var(--wrapper-max-width);
-  margin: auto;
-}
-
-/* ------------------------------------------------------------ *\
-  III.   Components
+  II.   Components
 \* ------------------------------------------------------------ */
 
 /* 1.Board */
 
 .board-container {
-  flex: 0 1 100%;
+  max-width: 1200px;
+  margin: auto;
   padding: var(--board-padding);
 }
 
@@ -245,7 +238,7 @@ body.initial .bets__chip button {
 
 .cell .small-chip {
   position: absolute;
-  top: min(var(--chip-top), 27px);
+  top: var(--chip-top);
   left: var(--chip-left-inner);
   width: var(--chip-size);
   height: var(--chip-size);
@@ -258,6 +251,7 @@ body.initial .bets__chip button {
   color: var(--color-black);
   align-content: center;
   overflow: hidden;
+  z-index: 1;
 }
 
 .cell .small-chip:nth-child(2) {
@@ -293,7 +287,7 @@ body.initial .bets__chip button {
 }
 
 .cell--green .chip-set {
-  margin-top: 55px;
+  margin-top: 20px;
 }
 
 /* 2.Bets */
@@ -383,7 +377,7 @@ body.initial .bets__chip button {
 }
 
 /* ------------------------------------------------------------ *\
-  IV.   Responsive
+  III.   Responsive
 \* ------------------------------------------------------------ */
 
 @media screen and (max-width: 1199px) {
@@ -401,20 +395,20 @@ body.initial .bets__chip button {
   }
 }
 
-@media screen and (max-width: 767px) {
-  .board-container {
-    zoom: 0.7;
-  }
-}
-
-@media screen and (max-width: 567px) {
+@media screen and (max-width: 639px) {
   :root {
     --cell-width: 33.33%;
-    --cell-height: 7.14%;
-    --board-padding: 25px 10px;
+    --cell-height: 7.7%;
+  }
+
+  .board-container {
+    height: 100%;
   }
   .board {
     display: flex;
+    height: calc(100% - 117px);
+    position: relative;
+    margin-top: 57px;
   }
 
   .main-cells {
@@ -423,19 +417,38 @@ body.initial .bets__chip button {
     align-content: center;
     justify-content: center;
     height: auto;
-    flex-basis: 156px;
+    flex-basis: 42%;
     order: 1;
+    line-height: 1;
   }
 
   .cell--green {
     border-radius: var(--radius-green) var(--radius-green) 0 0;
-    padding: 40px 0;
+    position: absolute;
+    top: -74px;
+    left: 30%;
+    width: 42%;
+    height: 86px;
+  }
+
+  .cell--green .chip-set {
+    margin-top: 10px;
+  }
+  .cell--green .chip-set--blue {
+    left: 25%;
+  }
+  .cell--green .chip-set--yellow {
+    left: 40%;
+  }
+  .cell--green .chip-set--red {
+    left: 55%;
   }
 
   .bottom-cells {
     display: flex;
-    flex-basis: 103px;
-    margin: 64px 0 30px;
+    flex-basis: 30%;
+    margin: 0;
+    height: calc(12 * var(--cell-height));
   }
 
   .bottom-cells .row:first-child {
@@ -471,21 +484,15 @@ body.initial .bets__chip button {
   .bets .bets__chip {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 85px;
-    right: calc(100% - 390px);
-    gap: 20px;
+    position: fixed;
+    top: 27%;
+    right: 0;
+    gap: 15px;
   }
-}
 
-@media screen and (max-width: 390px) {
-  .cell .small-chip {
-    top: min(var(--chip-top), 19px);
-  }
-}
-
-@media screen and (max-width: 360px) and (max-height: 640px) {
-  .board-container {
-    zoom: 0.6;
+  .bets .bets__actions {
+    flex-basis: 75%;
+    display: flex;
+    justify-content: space-around;
   }
 }
